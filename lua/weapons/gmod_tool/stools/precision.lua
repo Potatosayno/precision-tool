@@ -1121,8 +1121,8 @@ if CLIENT then
 		Panel:AddControl( "Checkbox", { Label = "Push/Pull as Percent (%) of target's depth", Command = "precision_nudgepercent", Description = "Unchecked = Exact units, Checked = takes % of width from target prop when pushing/pulling" } )
 
 
-		local user = LocalPlayer():GetInfoNum( "precision_user", 0 )
-		local mode = LocalPlayer():GetInfoNum( "precision_mode", 0 )
+		local user = GetConVar( "precision_user" ):GetInt()
+		local mode = GetConVar( "precision_mode" ):GetInt()
 		//Panel:AddControl( "Label", { Text = "Primary attack uses the tool's main mode.", Description	= "Select a mode and configure the options, be sure to try new things out!" }  )
 
 		local list = vgui.Create("DListView")
@@ -1449,7 +1449,7 @@ if CLIENT then
 
 
 	local function precision_defaults()
-		local mode = LocalPlayer():GetInfoNum( "precision_mode", 3 )
+		local mode = GetConVar( "precision_mode" ):GetInt()
 		if mode  == 1 then
 			RunConsoleCommand("precision_freeze", "1")
 			RunConsoleCommand("precision_autorotate", "1")
@@ -1561,7 +1561,7 @@ if CLIENT then
 	
 
 	function precision_setmode( player, tool, args )
-		if LocalPlayer():GetInfoNum( "precision_mode", 3 ) != args[1] then
+		if GetConVar( "precision_mode" ):GetInt() != args[1] then
 			RunConsoleCommand("precision_mode", args[1])
 			timer.Simple(0.05, function() precision_updatecpanel() end ) 
 		end
@@ -1570,7 +1570,7 @@ if CLIENT then
 
 
 	function precision_setuser( player, tool, args )
-		if LocalPlayer():GetInfoNum( "precision_user", 3 ) != args[1] then
+		if GetConVar( "precision_user" ):GetInt() != args[1] then
 			RunConsoleCommand("precision_user", args[1])
 			timer.Simple(0.05, function() precision_updatecpanel() end ) 
 		end
